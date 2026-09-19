@@ -13,7 +13,7 @@
     }
     .pdf-container {
       width: 210mm;
-      max-height: 295mm;
+      height: 295mm;
       padding: 8mm;
       margin: auto;
       background: white;
@@ -27,7 +27,17 @@
       font-size: 10px;
       width: 100%;
       border-radius: 2px;
-      height: 22px;
+      height: 20px;
+    }
+    .pdf-text-value {
+      display: inline-block;
+      width: 100%;
+      min-height: 18px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #0f172a;
+      border-bottom: 1px solid #94a3b8;
+      padding: 0 2px;
     }
   </style>
 </head>
@@ -176,25 +186,39 @@
   </div>
 
   <script>
-    document.getElementById('btn-gerar-pdf-pj').addEventListener('click', () => {
-      // Forçar cópia de valores digitados para atributos HTML antes do render
-      document.querySelectorAll('input').forEach(input => {
-        input.setAttribute('value', input.value);
+    document.getElementById('btn-gerar-pdf-pj').addEventListener('click', async () => {
+      const inputs = document.querySelectorAll('#conteudo-pdf input');
+      const substitutos = [];
+
+      // 1. Converte inputs em textos normais para não quebrar no canvas
+      inputs.forEach(input => {
+        const span = document.createElement('span');
+        span.className = 'pdf-text-value';
+        span.textContent = input.value || '';
+        input.style.display = 'none';
+        input.parentNode.insertBefore(span, input);
+        substitutos.push({ input, span });
       });
 
       const elemento = document.getElementById('conteudo-pdf');
       const empresa = document.getElementById('razao_social').value || 'Cliente_PJ';
 
       const opcoes = {
-        margin:       [0, 0, 0, 0],
+        margin:       0,
         filename:     `Cadastro_PJ_${empresa.replace(/\s+/g, '_')}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, logging: false, scrollY: 0 },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak:    { mode: 'avoid-all' }
+        html2canvas:  { scale: 2, useCORS: true, logging: false, windowWidth: 800 },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
-      html2pdf().set(opcoes).from(elemento).save();
+      // 2. Gera o PDF
+      await html2pdf().set(opcoes).from(elemento).save();
+
+      // 3. Restaura os inputs originais
+      substitutos.forEach(({ input, span }) => {
+        span.remove();
+        input.style.display = '';
+      });
     });
   </script>
 </body>
