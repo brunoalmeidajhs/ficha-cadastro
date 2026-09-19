@@ -244,6 +244,13 @@
     });
 
     document.getElementById('btn-gerar-pdf-pj').addEventListener('click', async () => {
+      const btn = document.getElementById('btn-gerar-pdf-pj');
+      btn.disabled = true;
+      btn.innerText = "A gerar PDF...";
+
+      // Remove spans antigos se existirem para evitar duplicar
+      document.querySelectorAll('.pdf-text-value').forEach(el => el.remove());
+
       const inputs = document.querySelectorAll('#conteudo-pdf input');
       const substitutos = [];
 
@@ -255,7 +262,7 @@
           const partes = input.value.split('-');
           span.textContent = `${partes[2]}/${partes[1]}/${partes[0]}`;
         } else {
-          span.textContent = input.value || '';
+          span.textContent = input.value || ' ';
         }
 
         input.style.display = 'none';
@@ -263,42 +270,50 @@
         substitutos.push({ input, span });
       });
 
-      const empresa = document.getElementById('razao_social').value || 'Cliente_PJ';
-      const blocos = document.querySelectorAll('.pdf-block');
-      
-      const { jsPDF } = window.jspdf || {};
-      const pdf = new html2pdf.Worker().prop.pdf || new window.jspdf.jsPDF('p', 'mm', 'a4');
-
-      const pageHeight = 297; // A4 altura
-      const margin = 10;
-      const contentMaxHeight = pageHeight - (margin * 2);
-      let currentY = margin;
-
-      for (let i = 0; i < blocos.length; i++) {
-        const bloco = blocos[i];
+      try {
+        const empresa = document.getElementById('razao_social').value || 'Cliente_PJ';
+        const blocos = document.querySelectorAll('.pdf-block');
         
-        const canvas = await html2canvas(bloco, { scale: 2, useCORS: true, logging: false });
-        const imgData = canvas.toDataURL('image/jpeg', 0.98);
-        
-        const imgWidth = 190; // A4 largura 210mm - (10mm * 2)
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        // Instanciação direta e segura do jsPDF
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF('p', 'mm', 'a4');
 
-        // Se o bloco não couber na página atual, cria uma nova página
-        if (currentY + imgHeight > contentMaxHeight + margin && i > 0) {
-          pdf.addPage();
-          currentY = margin;
+        const pageHeight = 297;
+        const margin = 10;
+        const contentMaxHeight = pageHeight - (margin * 2);
+        let currentY = margin;
+
+        for (let i = 0; i < blocos.length; i++) {
+          const bloco = blocos[i];
+          
+          const canvas = await html2canvas(bloco, { scale: 2, useCORS: true, logging: false });
+          const imgData = canvas.toDataURL('image/jpeg', 0.98);
+          
+          const imgWidth = 190;
+          const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+          if (currentY + imgHeight > contentMaxHeight + margin && i > 0) {
+            pdf.addPage();
+            currentY = margin;
+          }
+
+          pdf.addImage(imgData, 'JPEG', margin, currentY, imgWidth, imgHeight);
+          currentY += imgHeight + 4;
         }
 
-        pdf.addImage(imgData, 'JPEG', margin, currentY, imgWidth, imgHeight);
-        currentY += imgHeight + 4; // Espaçamento entre blocos
+        pdf.save(`Cadastro_PJ_${empresa.replace(/\s+/g, '_')}.pdf`);
+      } catch (erro) {
+        console.error("Erro ao gerar PDF:", erro);
+        alert("Ocorreu um erro ao gerar o PDF. Verifique a consola.");
+      } finally {
+        // Restaura o formulário ao estado original
+        substitutos.forEach(({ input, span }) => {
+          span.remove();
+          input.style.display = '';
+        });
+        btn.disabled = false;
+        btn.innerText = "Gerar e Baixar PDF (PJ)";
       }
-
-      pdf.save(`Cadastro_PJ_${empresa.replace(/\s+/g, '_')}.pdf`);
-
-      substitutos.forEach(({ input, span }) => {
-        span.remove();
-        input.style.display = '';
-      });
     });
   </script>
 </body>
