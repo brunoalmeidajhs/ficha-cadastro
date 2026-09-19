@@ -12,27 +12,30 @@
       .no-print { display: none !important; }
     }
     .pdf-container {
-      width: 210mm;
-      min-height: 297mm;
-      padding: 12mm 10mm;
-      margin: auto;
+      max-width: 800px;
+      margin: 0 auto;
       background: white;
+      padding: 20px;
       box-sizing: border-box;
+    }
+    .block-avoid-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
     input[type="text"], input[type="date"], input[type="email"], input[type="number"] {
       background-color: #f8fafc;
       border: 1px solid #cbd5e1;
-      padding: 2px 4px;
-      font-size: 11px;
+      padding: 3px 6px;
+      font-size: 12px;
       width: 100%;
-      border-radius: 3px;
-      height: 26px;
+      border-radius: 4px;
+      height: 28px;
     }
     .pdf-text-value {
       display: inline-block;
       width: 100%;
-      min-height: 20px;
-      font-size: 11px;
+      min-height: 22px;
+      font-size: 12px;
       font-weight: 600;
       color: #0f172a;
       border-bottom: 1px solid #94a3b8;
@@ -40,102 +43,102 @@
     }
   </style>
 </head>
-<body class="bg-gray-200 text-gray-800 text-xs">
+<body class="bg-gray-200 text-gray-800 text-sm py-6">
 
-  <div class="pdf-container" id="conteudo-pdf">
+  <div class="pdf-container shadow-md rounded" id="conteudo-pdf">
     
     <!-- Cabeçalho -->
-    <div class="flex justify-between items-center border-b-2 border-gray-800 pb-2 mb-3">
+    <div class="flex justify-between items-center border-b-2 border-gray-800 pb-2 mb-4 block-avoid-break">
       <div>
-        <h1 class="text-sm font-bold text-blue-900 tracking-tight">ALMEIDA E MAIA MATERIAIS DE CONSTRUÇÃO LTDA</h1>
-        <p class="text-[10px] font-semibold text-gray-700">CNPJ 08.678.892/0001-96</p>
-        <p class="text-xs font-extrabold text-amber-600 uppercase">FICHA DE CADASTRO PESSOA JURÍDICA</p>
+        <h1 class="text-base font-bold text-blue-900 tracking-tight">ALMEIDA E MAIA MATERIAIS DE CONSTRUÇÃO LTDA</h1>
+        <p class="text-xs font-semibold text-gray-700">CNPJ 08.678.892/0001-96</p>
+        <p class="text-sm font-extrabold text-amber-600 uppercase">FICHA DE CADASTRO PESSOA JURÍDICA</p>
       </div>
-      <img src="imagens/logo-construmaia.png" crossorigin="anonymous" alt="ConstruMaia" class="h-10 object-contain">
+      <img src="imagens/logo-construmaia.png" crossorigin="anonymous" alt="ConstruMaia" class="h-12 object-contain">
     </div>
 
-    <form id="form-pj" class="space-y-3">
+    <form id="form-pj" class="space-y-4">
       
       <!-- DADOS CADASTRAIS EMPRESA -->
-      <div class="border border-gray-300 rounded p-2 bg-gray-50/50">
-        <h2 class="font-bold text-xs text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Dados Cadastrais da Empresa</h2>
+      <div class="border border-gray-300 rounded p-3 bg-gray-50/50 block-avoid-break">
+        <h2 class="font-bold text-sm text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Dados Cadastrais da Empresa</h2>
         <div class="grid grid-cols-12 gap-2">
-          <div class="col-span-6"><label class="font-semibold block text-[10px]">Razão Social:</label><input type="text" id="razao_social"></div>
-          <div class="col-span-6"><label class="font-semibold block text-[10px]">Nome Fantasia:</label><input type="text" id="nome_fantasia"></div>
+          <div class="col-span-6"><label class="font-semibold block text-xs">Razão Social:</label><input type="text" id="razao_social"></div>
+          <div class="col-span-6"><label class="font-semibold block text-xs">Nome Fantasia:</label><input type="text" id="nome_fantasia"></div>
 
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">CNPJ:</label><input type="text" id="cnpj"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Insc. Estadual:</label><input type="text" id="ie"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Insc. Municipal:</label><input type="text" id="im"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Fone Com.:</label><input type="text" id="fone_empresa" class="phone-mask"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">CNPJ:</label><input type="text" id="cnpj"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Insc. Estadual:</label><input type="text" id="ie"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Insc. Municipal:</label><input type="text" id="im"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Fone Com.:</label><input type="text" id="fone_empresa" class="phone-mask"></div>
 
-          <div class="col-span-5"><label class="font-semibold block text-[10px]">End. Comercial:</label><input type="text" id="end_empresa"></div>
-          <div class="col-span-2"><label class="font-semibold block text-[10px]">Nº:</label><input type="text" id="num_empresa"></div>
-          <div class="col-span-2"><label class="font-semibold block text-[10px]">Complemento:</label><input type="text" id="comp_empresa"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Bairro:</label><input type="text" id="bairro_empresa"></div>
+          <div class="col-span-5"><label class="font-semibold block text-xs">End. Comercial:</label><input type="text" id="end_empresa"></div>
+          <div class="col-span-2"><label class="font-semibold block text-xs">Nº:</label><input type="text" id="num_empresa"></div>
+          <div class="col-span-2"><label class="font-semibold block text-xs">Complemento:</label><input type="text" id="comp_empresa"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Bairro:</label><input type="text" id="bairro_empresa"></div>
 
-          <div class="col-span-5"><label class="font-semibold block text-[10px]">Cidade:</label><input type="text" id="cidade_empresa"></div>
-          <div class="col-span-2"><label class="font-semibold block text-[10px]">UF:</label><input type="text" id="uf_empresa"></div>
-          <div class="col-span-5"><label class="font-semibold block text-[10px]">CEP:</label><input type="text" id="cep_empresa" placeholder="00000-000" onblur="buscarCEP(this.value, 'end_empresa', 'bairro_empresa', 'cidade_empresa', 'uf_empresa')"></div>
+          <div class="col-span-5"><label class="font-semibold block text-xs">Cidade:</label><input type="text" id="cidade_empresa"></div>
+          <div class="col-span-2"><label class="font-semibold block text-xs">UF:</label><input type="text" id="uf_empresa"></div>
+          <div class="col-span-5"><label class="font-semibold block text-xs">CEP:</label><input type="text" id="cep_empresa" placeholder="00000-000" onblur="buscarCEP(this.value, 'end_empresa', 'bairro_empresa', 'cidade_empresa', 'uf_empresa')"></div>
 
-          <div class="col-span-6"><label class="font-semibold block text-[10px]">E-mail Financeiro/NFe:</label><input type="email" id="email_empresa"></div>
-          <div class="col-span-6"><label class="font-semibold block text-[10px]">Ramo de Atividade:</label><input type="text" id="ramo_empresa"></div>
+          <div class="col-span-6"><label class="font-semibold block text-xs">E-mail Financeiro/NFe:</label><input type="email" id="email_empresa"></div>
+          <div class="col-span-6"><label class="font-semibold block text-xs">Ramo de Atividade:</label><input type="text" id="ramo_empresa"></div>
         </div>
       </div>
 
-      <!-- SÓCIO ADMINISTRADOR COMPLETO -->
-      <div class="border border-gray-300 rounded p-2 bg-gray-50/50">
-        <h2 class="font-bold text-xs text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Sócio Administrador</h2>
+      <!-- SÓCIO ADMINISTRADOR -->
+      <div class="border border-gray-300 rounded p-3 bg-gray-50/50 block-avoid-break">
+        <h2 class="font-bold text-sm text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Sócio Administrador</h2>
         <div class="grid grid-cols-12 gap-2">
-          <div class="col-span-6"><label class="font-semibold block text-[10px]">Nome Sócio Adm.:</label><input type="text" id="socio_adm"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Dt. Nasc.:</label><input type="date" id="socio_dtnasc"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">CPF:</label><input type="text" id="socio_cpf"></div>
+          <div class="col-span-6"><label class="font-semibold block text-xs">Nome Sócio Adm.:</label><input type="text" id="socio_adm"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Dt. Nasc.:</label><input type="date" id="socio_dtnasc"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">CPF:</label><input type="text" id="socio_cpf"></div>
 
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">RG:</label><input type="text" id="socio_rg"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Nacionalidade:</label><input type="text" id="socio_nac"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Naturalidade/UF:</label><input type="text" id="socio_nat"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Estado Civil:</label><input type="text" id="socio_ec"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">RG:</label><input type="text" id="socio_rg"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Nacionalidade:</label><input type="text" id="socio_nac"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Naturalidade/UF:</label><input type="text" id="socio_nat"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Estado Civil:</label><input type="text" id="socio_ec"></div>
 
-          <div class="col-span-5"><label class="font-semibold block text-[10px]">End. Residencial:</label><input type="text" id="socio_end"></div>
-          <div class="col-span-2"><label class="font-semibold block text-[10px]">Nº:</label><input type="text" id="socio_num"></div>
-          <div class="col-span-2"><label class="font-semibold block text-[10px]">Complemento:</label><input type="text" id="socio_comp"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Bairro:</label><input type="text" id="socio_bairro"></div>
+          <div class="col-span-5"><label class="font-semibold block text-xs">End. Residencial:</label><input type="text" id="socio_end"></div>
+          <div class="col-span-2"><label class="font-semibold block text-xs">Nº:</label><input type="text" id="socio_num"></div>
+          <div class="col-span-2"><label class="font-semibold block text-xs">Complemento:</label><input type="text" id="socio_comp"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Bairro:</label><input type="text" id="socio_bairro"></div>
 
-          <div class="col-span-5"><label class="font-semibold block text-[10px]">Cidade:</label><input type="text" id="socio_cidade"></div>
-          <div class="col-span-2"><label class="font-semibold block text-[10px]">UF:</label><input type="text" id="socio_uf"></div>
-          <div class="col-span-5"><label class="font-semibold block text-[10px]">CEP:</label><input type="text" id="socio_cep" placeholder="00000-000" onblur="buscarCEP(this.value, 'socio_end', 'socio_bairro', 'socio_cidade', 'socio_uf')"></div>
+          <div class="col-span-5"><label class="font-semibold block text-xs">Cidade:</label><input type="text" id="socio_cidade"></div>
+          <div class="col-span-2"><label class="font-semibold block text-xs">UF:</label><input type="text" id="socio_uf"></div>
+          <div class="col-span-5"><label class="font-semibold block text-xs">CEP:</label><input type="text" id="socio_cep" placeholder="00000-000" onblur="buscarCEP(this.value, 'socio_end', 'socio_bairro', 'socio_cidade', 'socio_uf')"></div>
 
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Fone Res.:</label><input type="text" id="socio_foneres" class="phone-mask"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Fone Com.:</label><input type="text" id="socio_fonecom" class="phone-mask"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Celular:</label><input type="text" id="socio_cel" class="phone-mask"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">E-mail:</label><input type="email" id="socio_email"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Fone Res.:</label><input type="text" id="socio_foneres" class="phone-mask"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Fone Com.:</label><input type="text" id="socio_fonecom" class="phone-mask"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Celular:</label><input type="text" id="socio_cel" class="phone-mask"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">E-mail:</label><input type="email" id="socio_email"></div>
         </div>
       </div>
 
       <!-- SÓCIO 2 -->
-      <div class="border border-gray-300 rounded p-2 bg-gray-50/50">
-        <h2 class="font-bold text-xs text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Outro Sócio (se houver)</h2>
+      <div class="border border-gray-300 rounded p-3 bg-gray-50/50 block-avoid-break">
+        <h2 class="font-bold text-sm text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Outro Sócio (se houver)</h2>
         <div class="grid grid-cols-12 gap-2">
-          <div class="col-span-6"><label class="font-semibold block text-[10px]">Nome Sócio:</label><input type="text" id="socio2_nome"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Dt. Nasc.:</label><input type="date" id="socio2_dtnasc"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">CPF:</label><input type="text" id="socio2_cpf"></div>
+          <div class="col-span-6"><label class="font-semibold block text-xs">Nome Sócio:</label><input type="text" id="socio2_nome"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Dt. Nasc.:</label><input type="date" id="socio2_dtnasc"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">CPF:</label><input type="text" id="socio2_cpf"></div>
 
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">RG:</label><input type="text" id="socio2_rg"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Fone Res.:</label><input type="text" id="socio2_foneres" class="phone-mask"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">Celular:</label><input type="text" id="socio2_cel" class="phone-mask"></div>
-          <div class="col-span-3"><label class="font-semibold block text-[10px]">E-mail:</label><input type="email" id="socio2_email"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">RG:</label><input type="text" id="socio2_rg"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Fone Res.:</label><input type="text" id="socio2_foneres" class="phone-mask"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">Celular:</label><input type="text" id="socio2_cel" class="phone-mask"></div>
+          <div class="col-span-3"><label class="font-semibold block text-xs">E-mail:</label><input type="email" id="socio2_email"></div>
         </div>
       </div>
 
-      <!-- PERSONS AUTORIZADAS -->
-      <div class="border border-gray-300 rounded p-2 bg-gray-50/50">
-        <h2 class="font-bold text-xs text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Pessoas Autorizadas a Comprar / Retirar Mercadorias</h2>
-        <div class="space-y-1.5">
-          <div class="grid grid-cols-12 gap-1.5">
+      <!-- PESSOAS AUTORIZADAS -->
+      <div class="border border-gray-300 rounded p-3 bg-gray-50/50 block-avoid-break">
+        <h2 class="font-bold text-sm text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Pessoas Autorizadas a Comprar / Retirar Mercadorias</h2>
+        <div class="space-y-2">
+          <div class="grid grid-cols-12 gap-2">
             <div class="col-span-6"><input type="text" placeholder="Nome Autorizado 1"></div>
             <div class="col-span-3"><input type="text" placeholder="CPF"></div>
             <div class="col-span-3"><input type="text" placeholder="RG"></div>
           </div>
-          <div class="grid grid-cols-12 gap-1.5">
+          <div class="grid grid-cols-12 gap-2">
             <div class="col-span-6"><input type="text" placeholder="Nome Autorizado 2"></div>
             <div class="col-span-3"><input type="text" placeholder="CPF"></div>
             <div class="col-span-3"><input type="text" placeholder="RG"></div>
@@ -144,18 +147,18 @@
       </div>
 
       <!-- REFERÊNCIAS -->
-      <div class="border border-gray-300 rounded p-2 bg-gray-50/50">
-        <h2 class="font-bold text-xs text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Referências Comerciais / Bancárias</h2>
-        <div class="space-y-1.5">
-          <div class="grid grid-cols-12 gap-1.5">
+      <div class="border border-gray-300 rounded p-3 bg-gray-50/50 block-avoid-break">
+        <h2 class="font-bold text-sm text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Referências Comerciais / Bancárias</h2>
+        <div class="space-y-2">
+          <div class="grid grid-cols-12 gap-2">
             <div class="col-span-8"><input type="text" placeholder="Comercial 1"></div>
             <div class="col-span-4"><input type="text" placeholder="Fone" class="phone-mask"></div>
           </div>
-          <div class="grid grid-cols-12 gap-1.5">
+          <div class="grid grid-cols-12 gap-2">
             <div class="col-span-8"><input type="text" placeholder="Comercial 2"></div>
             <div class="col-span-4"><input type="text" placeholder="Fone" class="phone-mask"></div>
           </div>
-          <div class="grid grid-cols-12 gap-1.5">
+          <div class="grid grid-cols-12 gap-2">
             <div class="col-span-4"><input type="text" placeholder="Banco"></div>
             <div class="col-span-3"><input type="text" placeholder="Fone" class="phone-mask"></div>
             <div class="col-span-2"><input type="text" placeholder="Agência"></div>
@@ -164,9 +167,9 @@
         </div>
       </div>
 
-      <!-- DECLARAÇÃO, DATA E ASSINATURAS -->
-      <div class="pt-2">
-        <p class="text-justify text-gray-700 text-[10px] leading-relaxed mb-4">
+      <!-- DECLARAÇÃO E ASSINATURAS -->
+      <div class="pt-3 block-avoid-break">
+        <p class="text-justify text-gray-700 text-xs leading-relaxed mb-4">
           Declaro que as informações por mim prestadas são verídicas e autorizo que sejam consultadas as referências indicadas e outras que venham a ser apuradas, bem como os órgãos SPC/SERASA e bancos de dados cadastrais.
         </p>
 
@@ -174,8 +177,7 @@
           <p class="font-semibold text-xs">Montes Claros/MG, <input type="text" id="data_hoje" class="border-b border-gray-500 w-36 text-center bg-transparent inline-block" placeholder="___/___/______"></p>
         </div>
 
-        <!-- Espaçamento ampliado para assinaturas digitais -->
-        <div class="grid grid-cols-2 gap-8 my-8 pt-6">
+        <div class="grid grid-cols-2 gap-8 my-8 pt-4">
           <div class="text-center">
             <div class="border-t border-gray-800 pt-2">
               <p class="font-bold text-gray-800 text-xs">Assinatura Sócio Administrador</p>
@@ -190,7 +192,7 @@
       </div>
 
       <!-- OBSERVAÇÕES -->
-      <div class="border-t pt-2 text-[9px] text-gray-600 space-y-1">
+      <div class="border-t pt-2 text-[10px] text-gray-600 space-y-1 block-avoid-break">
         <p class="font-bold">Observações:</p>
         <p>☐ Prazo para retorno 03 (três) dias úteis. | ☐ Cadastro sujeito a análise e aprovação desta empresa.</p>
       </div>
@@ -205,25 +207,25 @@
   </div>
 
   <script>
-    // Máscara de Telefone (DD) XXXXX-XXXX
-    document.querySelectorAll('.phone-mask').forEach(input => {
-      input.addEventListener('input', (e) => {
-        let v = e.target.value.replace(/\D/g, '');
-        if (v.length > 11) v = v.substring(0, 11);
-        if (v.length > 10) {
-          v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-        } else if (v.length > 6) {
-          v = v.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
-        } else if (v.length > 2) {
-          v = v.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
-        } else if (v.length > 0) {
-          v = v.replace(/^(\d*)$/, '($1');
-        }
-        e.target.value = v;
+    function aplicarMascarasTelefone() {
+      document.querySelectorAll('.phone-mask').forEach(input => {
+        input.addEventListener('input', (e) => {
+          let v = e.target.value.replace(/\D/g, '');
+          if (v.length > 11) v = v.substring(0, 11);
+          if (v.length > 10) {
+            v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+          } else if (v.length > 6) {
+            v = v.replace(/^(\d{2})(\d{4})(\d{0,4})$/, '($1) $2-$3');
+          } else if (v.length > 2) {
+            v = v.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
+          } else if (v.length > 0) {
+            v = v.replace(/^(\d*)$/, '($1');
+          }
+          e.target.value = v;
+        });
       });
-    });
+    }
 
-    // Consulta de CEP na API ViaCEP
     async function buscarCEP(cep, idEnd, idBairro, idCidade, idUf) {
       const cepLimpo = cep.replace(/\D/g, '');
       if (cepLimpo.length === 8) {
@@ -242,7 +244,10 @@
       }
     }
 
-    // Gerador de PDF
+    document.addEventListener('DOMContentLoaded', () => {
+      aplicarMascarasTelefone();
+    });
+
     document.getElementById('btn-gerar-pdf-pj').addEventListener('click', async () => {
       const inputs = document.querySelectorAll('#conteudo-pdf input');
       const substitutos = [];
@@ -251,7 +256,6 @@
         const span = document.createElement('span');
         span.className = 'pdf-text-value';
         
-        // Converte data de AAAA-MM-DD para DD/MM/AAAA
         if (input.type === 'date' && input.value) {
           const partes = input.value.split('-');
           span.textContent = `${partes[2]}/${partes[1]}/${partes[0]}`;
@@ -268,12 +272,12 @@
       const empresa = document.getElementById('razao_social').value || 'Cliente_PJ';
 
       const opcoes = {
-        margin:       [10, 8, 10, 8],
+        margin:       [8, 8, 8, 8],
         filename:     `Cadastro_PJ_${empresa.replace(/\s+/g, '_')}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, logging: false },
+        html2canvas:  { scale: 2, useCORS: true, scrollY: 0 },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak:    { mode: ['css', 'legacy'] }
+        pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
       };
 
       await html2pdf().set(opcoes).from(elemento).save();
