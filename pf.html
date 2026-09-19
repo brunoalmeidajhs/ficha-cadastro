@@ -7,340 +7,182 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
-    input[type="text"], input[type="date"], input[type="email"], input[type="number"] {
-      background-color: #f9fafb;
+    @media print {
+      body { background: white; padding: 0; }
+      .no-print { display: none !important; }
     }
-    input:focus {
-      background-color: #ffffff;
-      outline: 2px solid #1d4ed8;
+    .pdf-container {
+      width: 210mm;
+      min-height: 297mm;
+      padding: 10mm;
+      margin: auto;
+      background: white;
+      box-sizing: border-box;
+    }
+    input[type="text"], input[type="date"], input[type="email"], input[type="number"] {
+      background-color: #f8fafc;
+      border: 1px solid #cbd5e1;
+      padding: 2px 4px;
+      font-size: 11px;
+      width: 100%;
+      border-radius: 3px;
     }
   </style>
 </head>
-<body class="bg-gray-200 p-2 md:p-6 text-gray-800 text-xs">
+<body class="bg-gray-200 text-gray-800 text-xs">
 
-  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md border border-gray-300" id="conteudo-pdf">
+  <div class="pdf-container" id="conteudo-pdf">
     
     <!-- Cabeçalho -->
-    <div class="flex justify-between items-center border-b-2 border-gray-800 pb-3 mb-4">
+    <div class="flex justify-between items-center border-b-2 border-gray-800 pb-2 mb-3">
       <div>
-        <h1 class="text-base font-bold text-blue-900 tracking-tight">ALMEIDA E MAIA MATERIAIS DE CONSTRUÇÃO LTDA</h1>
-        <p class="text-xs font-semibold text-gray-700">CNPJ 08.678.892/0001-96</p>
-        <p class="text-sm font-extrabold text-amber-600 mt-1 uppercase">Ficha de Cadastro Pessoa Física</p>
+        <h1 class="text-sm font-bold text-blue-900 tracking-tight">ALMEIDA E MAIA MATERIAIS DE CONSTRUÇÃO LTDA</h1>
+        <p class="text-[10px] font-semibold text-gray-700">CNPJ 08.678.892/0001-96</p>
+        <p class="text-xs font-extrabold text-amber-600 mt-0.5 uppercase">FICHA DE CADASTRO PESSOA FÍSICA</p>
       </div>
-      <img src="imagens/logo-construmaia.png" alt="Constru Maia" class="h-12 object-contain">
+      <img src="imagens/logo-construmaia.png" crossorigin="anonymous" alt="ConstruMaia" class="h-10 object-contain">
     </div>
 
-    <form id="form-pf" class="space-y-4">
+    <form id="form-pf" class="space-y-2">
       
       <!-- DADOS PESSOAIS -->
-      <div class="border border-gray-300 rounded p-3 bg-gray-50/50">
-        <h2 class="font-bold text-xs text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Dados Pessoais</h2>
-        <div class="grid grid-cols-12 gap-2">
-          <div class="col-span-12 md:col-span-6">
-            <label class="font-semibold block">Nome:</label>
-            <input type="text" id="nome" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Dt. Nasc.:</label>
-            <input type="date" id="dt_nasc" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">CPF:</label>
-            <input type="text" id="cpf" class="w-full border rounded p-1">
-          </div>
+      <div class="border border-gray-300 rounded p-2 bg-gray-50/50">
+        <h2 class="font-bold text-[11px] text-blue-900 border-b border-gray-300 pb-0.5 mb-1.5 uppercase">Dados Pessoais</h2>
+        <div class="grid grid-cols-12 gap-1.5">
+          <div class="col-span-6"><label class="font-semibold block text-[10px]">Nome:</label><input type="text" id="nome"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Dt. Nasc.:</label><input type="date" id="dt_nasc"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">CPF:</label><input type="text" id="cpf"></div>
 
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">RG:</label>
-            <input type="text" id="rg" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Nacionalidade:</label>
-            <input type="text" id="nacionalidade" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Naturalidade / UF:</label>
-            <input type="text" id="naturalidade" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Estado Civil:</label>
-            <input type="text" id="estado_civil" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">RG:</label><input type="text" id="rg"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Nacionalidade:</label><input type="text" id="nacionalidade"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Naturalidade / UF:</label><input type="text" id="naturalidade"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Estado Civil:</label><input type="text" id="estado_civil"></div>
 
-          <div class="col-span-4 md:col-span-2">
-            <label class="font-semibold block">Nº Dependentes:</label>
-            <input type="number" id="num_dep" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-8 md:col-span-5">
-            <label class="font-semibold block">Nome Pai:</label>
-            <input type="text" id="nome_pai" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-12 md:col-span-5">
-            <label class="font-semibold block">Nome Mãe:</label>
-            <input type="text" id="nome_mae" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-2"><label class="font-semibold block text-[10px]">Nº Dep.:</label><input type="number" id="num_dep"></div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">Nome Pai:</label><input type="text" id="nome_pai"></div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">Nome Mãe:</label><input type="text" id="nome_mae"></div>
 
-          <div class="col-span-8 md:col-span-5">
-            <label class="font-semibold block">End. Residencial:</label>
-            <input type="text" id="end_res" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-4 md:col-span-1">
-            <label class="font-semibold block">Nº:</label>
-            <input type="text" id="num_res" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Complemento:</label>
-            <input type="text" id="comp_res" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Bairro:</label>
-            <input type="text" id="bairro_res" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">End. Residencial:</label><input type="text" id="end_res"></div>
+          <div class="col-span-1"><label class="font-semibold block text-[10px]">Nº:</label><input type="text" id="num_res"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Complemento:</label><input type="text" id="comp_res"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Bairro:</label><input type="text" id="bairro_res"></div>
 
-          <div class="col-span-6 md:col-span-5">
-            <label class="font-semibold block">Cidade:</label>
-            <input type="text" id="cidade_res" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-2 md:col-span-2">
-            <label class="font-semibold block">UF:</label>
-            <input type="text" id="uf_res" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-4 md:col-span-5">
-            <label class="font-semibold block">CEP:</label>
-            <input type="text" id="cep_res" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">Cidade:</label><input type="text" id="cidade_res"></div>
+          <div class="col-span-2"><label class="font-semibold block text-[10px]">UF:</label><input type="text" id="uf_res"></div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">CEP:</label><input type="text" id="cep_res"></div>
 
-          <div class="col-span-12 md:col-span-5">
-            <label class="font-semibold block">Empresa onde trabalha:</label>
-            <input type="text" id="empresa" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-4">
-            <label class="font-semibold block">Profissão:</label>
-            <input type="text" id="profissao" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Ano Admissão:</label>
-            <input type="text" id="ano_admissao" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">Empresa onde trabalha:</label><input type="text" id="empresa"></div>
+          <div class="col-span-4"><label class="font-semibold block text-[10px]">Profissão:</label><input type="text" id="profissao"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Ano Admissão:</label><input type="text" id="ano_admissao"></div>
 
-          <div class="col-span-6 md:col-span-4">
-            <label class="font-semibold block">Cargo:</label>
-            <input type="text" id="cargo" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-8">
-            <label class="font-semibold block">Ramo de Atividade:</label>
-            <input type="text" id="ramo_atividade" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-4"><label class="font-semibold block text-[10px]">Cargo:</label><input type="text" id="cargo"></div>
+          <div class="col-span-8"><label class="font-semibold block text-[10px]">Ramo de Atividade:</label><input type="text" id="ramo_atividade"></div>
 
-          <div class="col-span-8 md:col-span-5">
-            <label class="font-semibold block">End. Comercial:</label>
-            <input type="text" id="end_com" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-4 md:col-span-1">
-            <label class="font-semibold block">Nº:</label>
-            <input type="text" id="num_com" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Complemento:</label>
-            <input type="text" id="comp_com" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Bairro:</label>
-            <input type="text" id="bairro_com" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">End. Comercial:</label><input type="text" id="end_com"></div>
+          <div class="col-span-1"><label class="font-semibold block text-[10px]">Nº:</label><input type="text" id="num_com"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Complemento:</label><input type="text" id="comp_com"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Bairro:</label><input type="text" id="bairro_com"></div>
 
-          <div class="col-span-6 md:col-span-5">
-            <label class="font-semibold block">Cidade:</label>
-            <input type="text" id="cidade_com" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-2 md:col-span-2">
-            <label class="font-semibold block">UF:</label>
-            <input type="text" id="uf_com" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-4 md:col-span-5">
-            <label class="font-semibold block">CEP:</label>
-            <input type="text" id="cep_com" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">Cidade:</label><input type="text" id="cidade_com"></div>
+          <div class="col-span-2"><label class="font-semibold block text-[10px]">UF:</label><input type="text" id="uf_com"></div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">CEP:</label><input type="text" id="cep_com"></div>
 
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Fone Res.:</label>
-            <input type="text" id="fone_res_num" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Fone Com.:</label>
-            <input type="text" id="fone_com_num" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Celulares:</label>
-            <input type="text" id="celulares" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Renda:</label>
-            <input type="text" id="renda" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Fone Res.:</label><input type="text" id="fone_res_num"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Fone Com.:</label><input type="text" id="fone_com_num"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Celulares:</label><input type="text" id="celulares"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Renda:</label><input type="text" id="renda"></div>
 
-          <div class="col-span-12">
-            <label class="font-semibold block">E-mail:</label>
-            <input type="email" id="email" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-12"><label class="font-semibold block text-[10px]">E-mail:</label><input type="email" id="email"></div>
         </div>
       </div>
 
       <!-- REFERÊNCIAS PESSOAIS / COMERCIAIS / BANCÁRIAS -->
-      <div class="border border-gray-300 rounded p-3 bg-gray-50/50">
-        <h2 class="font-bold text-xs text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Referências Pessoais / Comerciais / Bancárias</h2>
-        <div class="space-y-2">
-          <div class="grid grid-cols-12 gap-2">
-            <div class="col-span-8"><input type="text" placeholder="Nome" class="w-full border rounded p-1"></div>
-            <div class="col-span-4"><input type="text" placeholder="Fone" class="w-full border rounded p-1"></div>
+      <div class="border border-gray-300 rounded p-2 bg-gray-50/50">
+        <h2 class="font-bold text-[11px] text-blue-900 border-b border-gray-300 pb-0.5 mb-1.5 uppercase">Referências Pessoais / Comerciais / Bancárias</h2>
+        <div class="space-y-1">
+          <div class="grid grid-cols-12 gap-1.5">
+            <div class="col-span-8"><input type="text" placeholder="Nome"></div>
+            <div class="col-span-4"><input type="text" placeholder="Fone"></div>
           </div>
-          <div class="grid grid-cols-12 gap-2">
-            <div class="col-span-8"><input type="text" placeholder="Comercial" class="w-full border rounded p-1"></div>
-            <div class="col-span-4"><input type="text" placeholder="Fone" class="w-full border rounded p-1"></div>
+          <div class="grid grid-cols-12 gap-1.5">
+            <div class="col-span-8"><input type="text" placeholder="Comercial"></div>
+            <div class="col-span-4"><input type="text" placeholder="Fone"></div>
           </div>
-          <div class="grid grid-cols-12 gap-2">
-            <div class="col-span-8"><input type="text" placeholder="Comercial" class="w-full border rounded p-1"></div>
-            <div class="col-span-4"><input type="text" placeholder="Fone" class="w-full border rounded p-1"></div>
+          <div class="grid grid-cols-12 gap-1.5">
+            <div class="col-span-8"><input type="text" placeholder="Comercial"></div>
+            <div class="col-span-4"><input type="text" placeholder="Fone"></div>
           </div>
-          <div class="grid grid-cols-12 gap-2">
-            <div class="col-span-4"><input type="text" placeholder="Banco" class="w-full border rounded p-1"></div>
-            <div class="col-span-3"><input type="text" placeholder="Fone" class="w-full border rounded p-1"></div>
-            <div class="col-span-2"><input type="text" placeholder="Agência" class="w-full border rounded p-1"></div>
-            <div class="col-span-3"><input type="text" placeholder="Conta" class="w-full border rounded p-1"></div>
+          <div class="grid grid-cols-12 gap-1.5">
+            <div class="col-span-4"><input type="text" placeholder="Banco"></div>
+            <div class="col-span-3"><input type="text" placeholder="Fone"></div>
+            <div class="col-span-2"><input type="text" placeholder="Agência"></div>
+            <div class="col-span-3"><input type="text" placeholder="Conta"></div>
           </div>
         </div>
       </div>
 
-      <!-- DADOS DO CÔNJUGE / COMPANHEIRO(A) -->
-      <div class="border border-gray-300 rounded p-3 bg-gray-50/50">
-        <h2 class="font-bold text-xs text-blue-900 border-b border-gray-300 pb-1 mb-2 uppercase">Dados do Cônjuge / Companheiro(a)</h2>
-        <div class="grid grid-cols-12 gap-2">
-          <div class="col-span-12 md:col-span-6">
-            <label class="font-semibold block">Nome:</label>
-            <input type="text" id="conjuge_nome" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Dt. Nasc.:</label>
-            <input type="date" id="conjuge_dtnasc" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">CPF:</label>
-            <input type="text" id="conjuge_cpf" class="w-full border rounded p-1">
-          </div>
+      <!-- DADOS DO CÔNJUGE -->
+      <div class="border border-gray-300 rounded p-2 bg-gray-50/50">
+        <h2 class="font-bold text-[11px] text-blue-900 border-b border-gray-300 pb-0.5 mb-1.5 uppercase">Dados do Cônjuge / Companheiro(a)</h2>
+        <div class="grid grid-cols-12 gap-1.5">
+          <div class="col-span-6"><label class="font-semibold block text-[10px]">Nome:</label><input type="text" id="conjuge_nome"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Dt. Nasc.:</label><input type="date" id="conjuge_dtnasc"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">CPF:</label><input type="text" id="conjuge_cpf"></div>
 
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">RG:</label>
-            <input type="text" id="conjuge_rg" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Nacionalidade:</label>
-            <input type="text" id="conjuge_nac" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-12 md:col-span-6">
-            <label class="font-semibold block">Nome Pai:</label>
-            <input type="text" id="conjuge_pai" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">RG:</label><input type="text" id="conjuge_rg"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Nacionalidade:</label><input type="text" id="conjuge_nac"></div>
+          <div class="col-span-6"><label class="font-semibold block text-[10px]">Nome Pai:</label><input type="text" id="conjuge_pai"></div>
 
-          <div class="col-span-12 md:col-span-6">
-            <label class="font-semibold block">Nome Mãe:</label>
-            <input type="text" id="conjuge_mae" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-12 md:col-span-6">
-            <label class="font-semibold block">Empresa onde trabalha:</label>
-            <input type="text" id="conjuge_empresa" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-6"><label class="font-semibold block text-[10px]">Nome Mãe:</label><input type="text" id="conjuge_mae"></div>
+          <div class="col-span-6"><label class="font-semibold block text-[10px]">Empresa onde trabalha:</label><input type="text" id="conjuge_empresa"></div>
 
-          <div class="col-span-6 md:col-span-4">
-            <label class="font-semibold block">Profissão:</label>
-            <input type="text" id="conjuge_prof" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-2">
-            <label class="font-semibold block">Ano Admissão:</label>
-            <input type="text" id="conjuge_adm" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Cargo:</label>
-            <input type="text" id="conjuge_cargo" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Ramo de Atividade:</label>
-            <input type="text" id="conjuge_ramo" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-4"><label class="font-semibold block text-[10px]">Profissão:</label><input type="text" id="conjuge_prof"></div>
+          <div class="col-span-2"><label class="font-semibold block text-[10px]">Ano Adm.:</label><input type="text" id="conjuge_adm"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Cargo:</label><input type="text" id="conjuge_cargo"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Ramo Atividade:</label><input type="text" id="conjuge_ramo"></div>
 
-          <div class="col-span-8 md:col-span-5">
-            <label class="font-semibold block">End. Comercial:</label>
-            <input type="text" id="conjuge_endcom" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-4 md:col-span-1">
-            <label class="font-semibold block">Nº:</label>
-            <input type="text" id="conjuge_numcom" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Complemento:</label>
-            <input type="text" id="conjuge_compcom" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Bairro:</label>
-            <input type="text" id="conjuge_bairrocom" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">End. Comercial:</label><input type="text" id="conjuge_endcom"></div>
+          <div class="col-span-1"><label class="font-semibold block text-[10px]">Nº:</label><input type="text" id="conjuge_numcom"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Complemento:</label><input type="text" id="conjuge_compcom"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Bairro:</label><input type="text" id="conjuge_bairrocom"></div>
 
-          <div class="col-span-6 md:col-span-5">
-            <label class="font-semibold block">Cidade:</label>
-            <input type="text" id="conjuge_cidadecom" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-2 md:col-span-2">
-            <label class="font-semibold block">UF:</label>
-            <input type="text" id="conjuge_ufcom" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-4 md:col-span-5">
-            <label class="font-semibold block">CEP:</label>
-            <input type="text" id="conjuge_cepcom" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">Cidade:</label><input type="text" id="conjuge_cidadecom"></div>
+          <div class="col-span-2"><label class="font-semibold block text-[10px]">UF:</label><input type="text" id="conjuge_ufcom"></div>
+          <div class="col-span-5"><label class="font-semibold block text-[10px]">CEP:</label><input type="text" id="conjuge_cepcom"></div>
 
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Fones Com.:</label>
-            <input type="text" id="conjuge_fonecom" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Celulares:</label>
-            <input type="text" id="conjuge_cel" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">E-mail:</label>
-            <input type="email" id="conjuge_email" class="w-full border rounded p-1">
-          </div>
-          <div class="col-span-6 md:col-span-3">
-            <label class="font-semibold block">Renda:</label>
-            <input type="text" id="conjuge_renda" class="w-full border rounded p-1">
-          </div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Fones Com.:</label><input type="text" id="conjuge_fonecom"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Celulares:</label><input type="text" id="conjuge_cel"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">E-mail:</label><input type="email" id="conjuge_email"></div>
+          <div class="col-span-3"><label class="font-semibold block text-[10px]">Renda:</label><input type="text" id="conjuge_renda"></div>
         </div>
       </div>
 
       <!-- DECLARAÇÃO E ASSINATURAS -->
-      <div class="pt-2">
-        <p class="text-justify text-gray-700 text-[10px] leading-tight mb-4">
+      <div class="pt-1">
+        <p class="text-justify text-gray-700 text-[9px] leading-tight mb-2">
           Declaro que as informações por mim prestadas são verídicas e autorizo que sejam consultadas as referências indicadas e outras que venham a ser apuradas, bem como os órgãos SPC/SERASA e bancos de dados cadastrais.
         </p>
 
-        <div class="mb-6">
-          <p class="font-semibold">Montes Claros/MG, <input type="text" id="data_hoje" class="border-b border-gray-500 w-40 text-center bg-transparent focus:outline-none" placeholder="___/___/______"></p>
+        <div class="mb-4">
+          <p class="font-semibold text-[10px]">Montes Claros/MG, <input type="text" id="data_hoje" class="border-b border-gray-500 w-32 text-center bg-transparent inline-block" placeholder="___/___/______"></p>
         </div>
 
-        <div class="grid grid-cols-2 gap-8 pt-4">
+        <div class="grid grid-cols-2 gap-8 pt-2">
           <div class="text-center">
-            <div class="border-t border-gray-800 pt-1">
-              <p class="font-bold text-gray-800">Assinatura</p>
+            <div class="border-t border-gray-800 pt-0.5">
+              <p class="font-bold text-gray-800 text-[10px]">Assinatura</p>
             </div>
           </div>
           <div class="text-center">
-            <div class="border-t border-gray-800 pt-1">
-              <p class="font-bold text-gray-800">Assinatura Cônjuge/Companheiro(a)</p>
+            <div class="border-t border-gray-800 pt-0.5">
+              <p class="font-bold text-gray-800 text-[10px]">Assinatura Cônjuge/Companheiro(a)</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- OBSERVAÇÕES DA EMPRESA -->
-      <div class="border-t pt-3 mt-4 text-[10px] text-gray-600 space-y-1">
+      <!-- OBSERVAÇÕES -->
+      <div class="border-t pt-1 mt-2 text-[9px] text-gray-600 space-y-0.5">
         <p class="font-bold">Observações:</p>
         <p>☐ prazo para retorno 03 (três) dias úteis.</p>
         <p>☐ cadastro está sujeito a análise e aprovação desta empresa.</p>
@@ -349,8 +191,7 @@
     </form>
   </div>
 
-  <!-- Botão para Gerar PDF -->
-  <div class="max-w-4xl mx-auto mt-4 text-center">
+  <div class="max-w-4xl mx-auto my-4 text-center no-print">
     <button id="btn-gerar-pdf" type="button" class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-lg shadow-md text-sm transition duration-200">
       Gerar e Baixar PDF (PF)
     </button>
@@ -362,10 +203,10 @@
       const nomeCliente = document.getElementById('nome').value || 'Cliente_PF';
 
       const opcoes = {
-        margin:       [5, 5, 5, 5],
+        margin:       0,
         filename:     `Cadastro_PF_${nomeCliente.replace(/\s+/g, '_')}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
+        html2canvas:  { scale: 2, useCORS: true, logging: false },
         jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
       };
 
