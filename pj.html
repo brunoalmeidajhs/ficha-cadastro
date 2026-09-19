@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ficha de Cadastro - Pessoa Jurídica | Constru Maia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="bg-gray-100 p-2 md:p-6 text-gray-800 text-xs">
+
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md border" id="conteudo-pdf">
+    <!-- Cabeçalho -->
+    <div class="flex justify-between items-center border-b pb-4 mb-4">
+      <div>
+        <h1 class="text-xl font-bold text-blue-900">ALMEIDA E MAIA MATERIAIS DE CONSTRUÇÃO LTDA</h1>
+        <p class="text-gray-600 font-semibold">CNPJ: 08.678.892/0001-96</p>
+        <p class="text-lg font-bold text-amber-500 mt-1">FICHA DE CADASTRO PESSOA JURÍDICA</p>
+      </div>
+      <img src="https://raw.githubusercontent.com/seu-usuario/ficha-cadastro/main/Logo%20ConstruMaia%20(para%20fundo%20claro).png" alt="Constru Maia" class="h-12 object-contain">
+    </div>
+
+    <form id="form-pj" class="space-y-4">
+      <!-- DADOS CADASTRAIS EMPRESA -->
+      <div class="bg-gray-50 p-3 rounded border">
+        <h2 class="font-bold text-sm text-blue-900 mb-2 border-b pb-1">DADOS CADASTRAIS DA EMPRESA</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+          <div class="md:col-span-2">
+            <label class="font-semibold">Razão Social:</label>
+            <input type="text" id="razao_social" class="w-full border rounded p-1">
+          </div>
+          <div>
+            <label class="font-semibold">Nome Fantasia:</label>
+            <input type="text" id="nome_fantasia" class="w-full border rounded p-1">
+          </div>
+          <div>
+            <label class="font-semibold">CNPJ:</label>
+            <input type="text" id="cnpj" class="w-full border rounded p-1">
+          </div>
+          <div>
+            <label class="font-semibold">Insc. Estadual:</label>
+            <input type="text" id="ie" class="w-full border rounded p-1">
+          </div>
+          <div>
+            <label class="font-semibold">Telefone Com.:</label>
+            <input type="text" id="fone_empresa" class="w-full border rounded p-1">
+          </div>
+        </div>
+      </div>
+
+      <!-- SÓCIO ADMINISTRADOR -->
+      <div class="bg-gray-50 p-3 rounded border">
+        <h2 class="font-bold text-sm text-blue-900 mb-2 border-b pb-1">SÓCIO ADMINISTRADOR</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+          <div class="md:col-span-2">
+            <label class="font-semibold">Nome Sócio Adm.:</label>
+            <input type="text" id="socio_adm" class="w-full border rounded p-1">
+          </div>
+          <div>
+            <label class="font-semibold">CPF / RG:</label>
+            <input type="text" id="doc_socio" class="w-full border rounded p-1">
+          </div>
+          <div>
+            <label class="font-semibold">E-mail Sócio:</label>
+            <input type="email" id="email_socio" class="w-full border rounded p-1">
+          </div>
+          <div>
+            <label class="font-semibold">Celular Sócio:</label>
+            <input type="text" id="cel_socio" class="w-full border rounded p-1">
+          </div>
+        </div>
+      </div>
+
+      <!-- PESSOAS AUTORIZADAS A RETIRAR MERCADORIAS -->
+      <div class="bg-gray-50 p-3 rounded border">
+        <h2 class="font-bold text-sm text-blue-900 mb-2 border-b pb-1">PESSOAS AUTORIZADAS A COMPRAR / RETIRAR MERCADORIAS</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+          <div>
+            <label class="font-semibold">Nome Autorizado 1:</label>
+            <input type="text" id="aut1_nome" class="w-full border rounded p-1 mb-1" placeholder="Nome completo">
+            <input type="text" id="aut1_doc" class="w-full border rounded p-1" placeholder="CPF / RG">
+          </div>
+          <div>
+            <label class="font-semibold">Nome Autorizado 2:</label>
+            <input type="text" id="aut2_nome" class="w-full border rounded p-1 mb-1" placeholder="Nome completo">
+            <input type="text" id="aut2_doc" class="w-full border rounded p-1" placeholder="CPF / RG">
+          </div>
+        </div>
+      </div>
+
+      <!-- ASSINATURA -->
+      <div class="border-t pt-3">
+        <p class="text-justify text-gray-600 mb-3 text-[10px]">
+          Declaro que as informações por mim prestadas são verídicas e autorizo que sejam consultadas as referências indicadas e outras que venham a ser apuradas, bem como os órgãos SPC/SERASA e bancos de dados cadastrais.
+        </p>
+        <div class="max-w-md mx-auto">
+          <label class="font-semibold block mb-1 text-center">Assinatura Sócio Administrador:</label>
+          <div class="border rounded bg-gray-50">
+            <canvas id="canvas-pj" class="w-full h-28 touch-none"></canvas>
+          </div>
+          <button type="button" id="btn-limpar-pj" class="text-red-600 text-[10px] underline mt-1 block mx-auto">Limpar Assinatura</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="max-w-4xl mx-auto mt-4 text-center">
+    <button id="btn-gerar-pdf-pj" class="bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-6 rounded shadow text-sm">
+      Gerar e Baixar PDF (PJ)
+    </button>
+  </div>
+
+  <script>
+    const canvasPJ = document.getElementById('canvas-pj');
+    const padPJ = new SignaturePad(canvasPJ);
+
+    function resizeCanvas() {
+      const ratio = Math.max(window.devicePixelRatio || 1, 1);
+      canvasPJ.width = canvasPJ.offsetWidth * ratio;
+      canvasPJ.height = canvasPJ.offsetHeight * ratio;
+      canvasPJ.getContext("2d").scale(ratio, ratio);
+      padPJ.clear();
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    document.getElementById('btn-limpar-pj').addEventListener('click', () => padPJ.clear());
+
+    document.getElementById('btn-gerar-pdf-pj').addEventListener('click', () => {
+      const empresa = document.getElementById('razao_social').value || 'Empresa_PJ';
+      const elemento = document.getElementById('conteudo-pdf');
+
+      const opcoes = {
+        margin: 5,
+        filename: `Cadastro_PJ_${empresa.replace(/\s+/g, '_')}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      };
+
+      html2pdf().set(opcoes).from(elemento).save();
+    });
+  </script>
+</body>
+</html>
